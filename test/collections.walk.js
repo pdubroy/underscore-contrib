@@ -166,6 +166,15 @@ $(document).ready(function() {
     deepEqual(_.walk.find(tree, findValue(99)), undefined);
   });
 
+  test("findWhere", function() {
+    var tree = getSimpleTestTree();
+
+    equal(_.walk.findWhere(tree, { val: 0 }).val, 0, 'finds the right value');
+    deepEqual(_.walk.findWhere(tree, { val: 0 }), tree, 'finds the root node');
+    deepEqual(_.walk.findWhere(tree, { val: 4 }), tree.r, 'finds the right subtree of the root');
+    equal(_.walk.findWhere(tree, { val: 99 }), undefined, 'returns undefined if no match is found');
+  });
+
   test("filter", function() {
     var tree = getSimpleTestTree();
     tree.r.val = '.oOo.';  // Remove one of the numbers.

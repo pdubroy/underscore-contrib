@@ -93,6 +93,19 @@
       return result;
     },
 
+    // Convenience version of a common use case of `filter`: selecting only objects
+    // containing specific `key:value` pairs.
+    findWhere: function(obj, attrs) {
+      if (!_.isEmpty(attrs)) {
+        return _.walk.find(obj, function(value) {
+          for (var key in attrs) {
+            if (attrs[key] !== value[key]) return false;
+          }
+          return true;
+        });
+      }
+    },
+
     // Recursively traverses `obj` and returns all the elements that pass a
     // truth test. `strategy` is the traversal function to use, e.g. `preorder`
     // or `postorder`.
